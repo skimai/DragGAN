@@ -3,7 +3,9 @@
 
 This is an unofficial implementation of the paper ["Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold"](https://arxiv.org/pdf/2305.10973.pdf) by Xingang Pan, Ayush Tewari, Thomas Leimkühler, Lingjie Liu, Abhimitra Meka, and Christian Theobalt. 
 
-The UI is built with the Streamlit framework to run as a web app in your browser.
+The UI is built with the Streamlit framework to run as a web app in your browser. A Colab demo is available to run with a free GPU:
+
+[![Colab Demo](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1E8s9ZMQMlKXcb9KahA-_fCd63HHl4XiH?usp=sharing)
 
 
 ## Setup
@@ -16,7 +18,7 @@ Follow these steps to run the app in your local environment:
 
 ## TODO
 
-- [ ] Add Colab demo
+- [X] Add Colab demo
 - [ ] Implement mask reconstruction loss
 - [ ] Regularization loss
 - [ ] Inversion for real image editing
