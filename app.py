@@ -17,7 +17,7 @@ st.header("🐉 DragGAN")
 
 message_container = st.empty()
 
-col1, col2 = st.columns([1, 3])
+col1, col2 = st.columns([1, 2])
 
 def reset():
     st.session_state.clear()
@@ -36,6 +36,10 @@ with col2:
 
 ### Settings panel in left col ###
 with col1:
+    st.markdown("#")
+    st.markdown("#")
+
+    settings_col1, settings_col2 = st.columns([1,1])
     # Models from Self-Distilled SG https://github.com/self-distilled-stylegan/self-distilled-internet-photos
     model_options = {
         "Lions": "https://storage.googleapis.com/self-distilled-stylegan/lions_512_pytorch.pkl",
@@ -51,20 +55,21 @@ with col1:
         "Wildlife": "https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/afhqwild.pkl",
         "MetFaces": "https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/metfaces.pkl",
     }
-    model_name = str(st.selectbox("Model", list(model_options.keys()), on_change=reset, help="StyleGAN2 model to use, downloaded and cached on first run"))
+    model_name = str(settings_col1.selectbox("Model", list(model_options.keys()), on_change=reset, help="StyleGAN2 model to use, downloaded and cached on first run"))
     model_url = model_options[model_name]
-
-    target_resolution = int(st.selectbox("Resolution", [256, 512, 1024], index=1, on_change=reset, help="Resize generated image to this resolution (may be different than native model resolution)"))
-    seed = st.number_input("Seed", value=22, step=1, min_value=0, on_change=reset, help="Random seed for generating W+ latent")
-    truncation_psi = st.number_input("Truncation", value=0.8, step=0.1, min_value=0.0, on_change=reset, help="Truncation trick value to control diversity (higher = more diverse)")
-    truncation_cutoff = st.number_input(
+    seed = settings_col2.number_input("Seed", value=22, step=1, min_value=0, on_change=reset, help="Random seed for generating W+ latent")
+    target_resolution = int(settings_col1.selectbox("Resolution", [256, 512, 1024], index=1, on_change=reset, help="Resize generated image to this resolution (may be different than native model resolution)"))
+    n_iter = int(settings_col1.number_input("Iterations", value=200, step=5, help="Number of iterations to run optimization", on_change=reset))
+    step_size = settings_col2.number_input("Step Size", value=1e-3, step=1e-4, min_value=1e-4, format="%.4f", help="Step size (Learning Rate) for gradient descent")
+    multiplier = settings_col1.number_input("Speed", value=1.0, step=0.05, min_value=0.05, help="Multiplier for target patch movement")
+    tolerance = settings_col2.number_input("Tolerance", value=2, step=1, min_value=1, help="Number of pixels away from target to stop")
+    
+    display_every = settings_col2.number_input("Display Every", value=1, step=1, min_value=1, help="Display image during optimization every n iterations")
+    truncation_psi = settings_col1.number_input("Truncation", value=0.8, step=0.1, min_value=0.0, on_change=reset, help="Truncation trick value to control diversity (higher = more diverse)")
+    truncation_cutoff = settings_col2.number_input(
         "Truncation Cutoff", value=8, step=1, min_value=-1, max_value=18, on_change=reset, help="Number of layers to apply truncation to (-1 = all layers)"
-    )
-    n_iter = int(st.number_input("Iterations", value=200, step=5, help="Number of iterations to run optimization", on_change=reset))
-    step_size = st.number_input("Step Size", value=1e-3, step=1e-4, min_value=1e-4, format="%.4f", help="Step size (Learning Rate) for gradient descent")
-    multiplier = st.number_input("Speed", value=1.0, step=0.05, min_value=0.05, help="Multiplier for target patch movement")
-    tolerance = st.number_input("Tolerance", value=2, step=1, min_value=1, help="Number of pixels away from target to stop")
-    display_every = st.number_input("Display Every", value=1, step=1, min_value=1, help="Display image during optimization every n iterations")
+    )    
+    
 
     if reset_button:
         reset_rerun()
