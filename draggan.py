@@ -376,10 +376,7 @@ def motion_supervision(
         # mask = utils.create_square_mask(F.shape[2], F.shape[3], center=handle_points[i].tolist(), radius=r1).to(device)
 
         # Find indices where mask is True
-        y_indices, x_indices = torch.nonzero(mask, as_tuple=True)
-        coordinates = torch.stack(
-            (y_indices, x_indices), dim=-1
-        ).float()  # shape [num_points, 2]
+        coordinates = torch.nonzero(mask).float()  # shape [num_points, 2]
 
         # Shift the coordinates in the direction d_i
         shifted_coordinates = coordinates + d_i[None]
@@ -457,10 +454,7 @@ def point_tracking(
         ).to(device)
 
         # Find indices where the patch is True
-        y_indices, x_indices = torch.nonzero(patch, as_tuple=True)
-        patch_coordinates = torch.stack(
-            (y_indices, x_indices), dim=-1
-        )  # shape [num_points, 2]
+        patch_coordinates = torch.nonzero(patch)  # shape [num_points, 2]
 
         # Extract features in the patch 
         F_qi = F[
