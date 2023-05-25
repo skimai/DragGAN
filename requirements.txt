@@ -1,0 +1,5 @@
+torch
+torchvision
+streamlit==1.22.0
+# streamlit-drawable-canvas==0.9.2
+streamlit-image-coordinates==0.1.3
