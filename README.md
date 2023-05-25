@@ -1,5 +1,6 @@
 # Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold (Unofficial)
 
+[demo.webm](https://github.com/skimai/DragGAN/assets/2939753/26d56b4e-fad0-4619-be51-2582c9ff4e08)
 
 This is an unofficial implementation of the paper ["Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold"](https://arxiv.org/pdf/2305.10973.pdf) by Xingang Pan, Ayush Tewari, Thomas Leimkühler, Lingjie Liu, Abhimitra Meka, and Christian Theobalt. 
 
