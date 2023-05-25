@@ -13,7 +13,6 @@ st.set_page_config(
     layout="wide",
 )
 
-st.header("🐉 DragGAN")
 
 message_container = st.empty()
 
@@ -29,6 +28,7 @@ def reset_rerun():
 
 ### Run/Reset buttons in right col ###
 with col2:
+    st.markdown("")
     but_col1, but_col2 = st.columns([1,7])
     run_button = but_col1.button("▶️ Run")
     reset_button = but_col2.button("🔁 Reset")
@@ -36,8 +36,7 @@ with col2:
 
 ### Settings panel in left col ###
 with col1:
-    st.markdown("#")
-    st.markdown("#")
+    st.header("🐉 DragGAN")
 
     settings_col1, settings_col2 = st.columns([1,1])
     # Models from Self-Distilled SG https://github.com/self-distilled-stylegan/self-distilled-internet-photos
