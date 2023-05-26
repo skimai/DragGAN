@@ -1,10 +1,10 @@
 # Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold (Unofficial)
 
-<div style="display: flex;">
+<p>
   <img src="media/lion.gif" alt="lion" style="width: 250px;" />
   <img src="media/ffhq.gif" alt="ffhq" style="width: 250px;" />
   <img src="media/dog.gif" alt="dog" style="width: 250px; />
-</div>
+</p>
 
 ---
                                            
