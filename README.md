@@ -1,13 +1,15 @@
 # Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold (Unofficial)
 
 <div style="display: flex;">
-  <img src="media/lion.gif" alt="lion" style="width: 300px;" />
-  <img src="media/ffhq.gif" alt="ffhq" style="width: 300px;" />
-  <img src="media/dog.gif" alt="dog" style="width: 300px; />
+  <img src="media/lion.gif" alt="lion" style="width: 200px;" />
+  <img src="media/ffhq.gif" alt="ffhq" style="width: 200px;" />
+  <img src="media/dog.gif" alt="dog" style="width: 200px; />
 </div>
 
-https://github.com/skimai/DragGAN/assets/2939753/de8760f6-56be-4434-97c5-11b4dc35bbb3
-
+                                            
+<video src="https://github.com/skimai/DragGAN/assets/2939753/de8760f6-56be-4434-97c5-11b4dc35bbb3" controls="controls" style="max-width: 730px;">
+</video>
+                                           
 This is an unofficial implementation of the paper ["Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold"](https://arxiv.org/pdf/2305.10973.pdf) by Xingang Pan, Ayush Tewari, Thomas Leimkühler, Lingjie Liu, Abhimitra Meka, and Christian Theobalt. 
 
 The UI is built with the Streamlit framework to run as a web app in your browser. A Colab demo is available to run with a free GPU:
