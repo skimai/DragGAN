@@ -56,7 +56,7 @@ This project is made possible by these works:
 For the complete details about the algorithm please refer to the original paper:
 
 * [Arxiv](https://arxiv.org/abs/2305.10973)
-* [Project Page](link-to-project-page)
+* [Project Page](https://vcai.mpi-inf.mpg.de/projects/DragGAN/)
 * [Official Repository](https://github.com/XingangPan/DragGAN)
 
 ```
