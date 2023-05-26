@@ -5,6 +5,8 @@
   <img src="media/ffhq.gif" alt="ffhq" style="width: 250px;" />
   <img src="media/dog.gif" alt="dog" style="width: 250px; />
 </div>
+
+---
                                            
 This is an unofficial implementation of the paper ["Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold"](https://arxiv.org/pdf/2305.10973.pdf) by Xingang Pan, Ayush Tewari, Thomas Leimkühler, Lingjie Liu, Abhimitra Meka, and Christian Theobalt. 
 
