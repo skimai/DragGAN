@@ -1,11 +1,21 @@
 import time
-
+import torch
 import streamlit as st
 from PIL import Image, ImageDraw
 from streamlit_image_coordinates import streamlit_image_coordinates
 
 import draggan
 import utils
+
+
+## Default to CPU if no GPU is available
+if torch.cuda.is_available():
+  device = torch.device("cuda")
+else:
+    device = torch.device("cpu")
+
+
+### Streamlit setup ###
 
 st.set_page_config(
     page_title="DragGAN Demo",
@@ -81,7 +91,7 @@ if "points" not in st.session_state:
 
 
 s = time.perf_counter()
-G = draggan.load_model(model_url)
+G = draggan.load_model(model_url, device=device)
 
 if "W" not in st.session_state:
     W = draggan.generate_W(
@@ -90,11 +100,12 @@ if "W" not in st.session_state:
         truncation_psi=truncation_psi,
         truncation_cutoff=int(truncation_cutoff),
         network_pkl=model_url,
+        device=device,
     )
 else:
     W = st.session_state["W"]
 
-img, F0 = draggan.generate_image(W, G, network_pkl=model_url)
+img, F0 = draggan.generate_image(W, G, network_pkl=model_url, device=device)
 if img.size[0] != target_resolution:
     img = img.resize((target_resolution, target_resolution))
 print(f"Generated image in {(time.perf_counter() - s)*1000:.0f}ms")
@@ -158,6 +169,7 @@ if run_button:
             empty=empty,
             display_every=display_every,
             target_resolution=target_resolution,
+            device=device,
         )
         # st.write(handles)
         # st.write(targets)
