@@ -12,6 +12,8 @@ The UI is built with the Streamlit framework to run as a web app in your browser
   <img src="media/dog.gif" alt="dog" style="width: 250px; />
 </p>
 
+---
+                                            
 https://github.com/skimai/DragGAN/assets/2939753/d38f89ef-721d-4272-bc47-acd643d47072
 
 
