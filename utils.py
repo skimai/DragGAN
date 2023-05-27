@@ -1,7 +1,8 @@
-from typing import Optional, Tuple
+from typing import List, Optional, Tuple
 import numpy as np
 import torch
 import PIL
+import math
 
 
 def tensor_to_PIL(img: torch.Tensor) -> PIL.Image.Image:
@@ -38,6 +39,72 @@ def get_ellipse_coords(
         center[0] + radius,
         center[1] + radius,
     )
+
+
+def draw_handle_target_points(
+        img: PIL.Image.Image, 
+        handle_points: List[Tuple[int, int]],
+        target_points: List[Tuple[int, int]],
+        radius: int = 5):
+    """
+    Draws handle and target points with arrow pointing towards the target point.
+
+    Args:
+        img (PIL.Image.Image): The image to draw on.
+        handle_points (List[Tuple[int, int]]): A list of handle [x,y] points.
+        target_points (List[Tuple[int, int]]): A list of target [x,y] points.
+        radius (int): The radius of the handle and target points.
+    """
+    if len(handle_points) == len(target_points) + 1:
+        target_points.append(None)
+    draw = PIL.ImageDraw.Draw(img)
+    for handle_point, target_point in zip(handle_points, target_points):
+        # Draw the handle point
+        handle_coords = get_ellipse_coords(handle_point, radius)
+        draw.ellipse(handle_coords, fill="red")
+
+        if target_point:
+            # Draw the target point
+            target_coords = get_ellipse_coords(target_point, radius)
+            draw.ellipse(target_coords, fill="blue")
+
+            # Draw arrow head
+            arrow_head_length = 10.0
+
+            # Compute the direction vector of the line
+            dx = target_point[0] - handle_point[0]
+            dy = target_point[1] - handle_point[1]
+            angle = math.atan2(dy, dx)
+
+            # Shorten the target point by the length of the arrowhead
+            shortened_target_point = (
+                target_point[0] - arrow_head_length * math.cos(angle),
+                target_point[1] - arrow_head_length * math.sin(angle),
+            )
+            
+            # Draw the arrow (main line)
+            draw.line([tuple(handle_point), shortened_target_point], fill='green', width=2)
+
+            # Compute the points for the arrowhead
+            arrow_point1 = (
+                target_point[0] - arrow_head_length * math.cos(angle - math.pi / 6),
+                target_point[1] - arrow_head_length * math.sin(angle - math.pi / 6),
+            )
+
+            arrow_point2 = (
+                target_point[0] - arrow_head_length * math.cos(angle + math.pi / 6),
+                target_point[1] - arrow_head_length * math.sin(angle + math.pi / 6),
+            )
+
+            # Draw the arrowhead
+            draw.polygon([tuple(target_point), arrow_point1, arrow_point2], fill='green')
+ 
+    # # Draw shifted coordinates handle + d_i
+    # for points in all_shifted_coordinates:
+    #     if not torch.isnan(points).any():
+    #         coords = utils.get_ellipse_coords(points.mean(0).flip(-1).cpu().long().numpy().tolist(), 7)
+    #         draw.ellipse(coords, fill="orange")
+
 
 
 def create_circular_mask(

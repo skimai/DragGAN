@@ -109,18 +109,19 @@ img, F0 = draggan.generate_image(W, G, network_pkl=model_url, device=device)
 if img.size[0] != target_resolution:
     img = img.resize((target_resolution, target_resolution))
 print(f"Generated image in {(time.perf_counter() - s)*1000:.0f}ms")
-draw = ImageDraw.Draw(img)
 
 # Draw an ellipse at each coordinate in points
 if "points" in st.session_state and "points_types" in st.session_state:
+    handles, targets = [], []
     for point, point_type in zip(
         st.session_state["points"], st.session_state["points_types"]
     ):
-        coords = utils.get_ellipse_coords(point)
         if point_type == "handle":
-            draw.ellipse(coords, fill="red")
-        elif point_type == "target":
-            draw.ellipse(coords, fill="blue")
+            handles.append(point)
+        else:
+            targets.append(point)
+    if len(handles) > 0:
+        utils.draw_handle_target_points(img, handles, targets)
 
 
 ### Right column image container ###
@@ -141,20 +142,9 @@ with col2:
                 
                 st.experimental_rerun()
 
-handles = []
-targets = []
-if "points" in st.session_state and "points_types" in st.session_state:
-    for point, point_type in zip(
-        st.session_state["points"], st.session_state["points_types"]
-    ):
-        if point_type == "handle":
-            handles.append(point)
-        elif point_type == "target":
-            targets.append(point)
-
 ## Optimization loop
 if run_button:
-    if len(handles) > 0 and len(targets) > 0 and len(handles) == len(targets):
+    if len(handles) > 0 and len(targets) > 0 and len(handles) == len(targets) and all(targets):
         W = draggan.optimize(
             W,
             G,
