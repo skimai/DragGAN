@@ -19,9 +19,9 @@
 
 This is an unofficial implementation of the paper ["Drag Your GAN: Interactive Point-based Manipulation on the Generative Image Manifold"](https://arxiv.org/pdf/2305.10973.pdf) by Xingang Pan, Ayush Tewari, Thomas Leimkühler, Lingjie Liu, Abhimitra Meka, and Christian Theobalt. 
 
-The UI is built with the Streamlit framework to run as a web app in your browser. A Colab demo is available to run with a free GPU:
+The UI is built with the Streamlit framework to run as a web app in your browser. GPU-enabled demos are available for Hugging Face Spaces and Colab:
 
-[![Colab Demo](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1E8s9ZMQMlKXcb9KahA-_fCd63HHl4XiH?usp=sharing)
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/skimai/DragGAN_Streamlit) [![Colab Demo](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1E8s9ZMQMlKXcb9KahA-_fCd63HHl4XiH?usp=sharing)
 
 https://github.com/skimai/DragGAN/assets/2939753/d38f89ef-721d-4272-bc47-acd643d47072
 
@@ -38,6 +38,7 @@ Follow these steps to run the app in your local environment:
 ## TODO
 
 - [X] Add Colab demo
+- [X] Add Hugging Face Spaces demo
 - [ ] Implement mask reconstruction loss
 - [ ] Regularization loss
 - [ ] Inversion for real image editing
